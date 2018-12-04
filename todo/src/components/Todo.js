@@ -21,23 +21,28 @@ class Todo extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        console.log('from handle submit method', this.props.onHandleSubmit(this.state.value))
+        // console.log('from handle submit method', this.props.onHandleSubmit(this.state.value))
+        this.props.onHandleSubmit(this.state.value)
         this.setState({
             todos: [...this.state.todos, this.state.value, this.state.completed: false],
             value: ''
         });
     }
 
+    changeCompleted = props => {
+        console.log('Vamos')
+        this.setState({
+            completed: !this.state.completed
+        })
+    }
+
     render() {
-        console.log('from Todo class', this.state.value)
+        console.log('from Todo class', this.state.completed)
         return (
             <div>
-                {this.state.todos.map((item, index) => 
-                    <TodoList 
-                        todo={item}
-                    />
-                )}
-                {/* <TodoList todos={this.state.todos} /> */}
+                <TodoList todos={this.state.todos} 
+                    changeCompleted={this.changeCompleted}
+                />
                 <form onSubmit={this.handleSubmit}>
                     <input type='text' name='email' onChange={this.handleChange}/>
                     <input type="submit" value="Add Todo" />

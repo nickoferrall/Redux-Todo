@@ -1,25 +1,22 @@
-// import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-// import * as actionTypes from '../../store/actions';
-import React from 'react';
-// import React, { Component } from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addTodo } from '../actions/todoActions';
 
-// class Todo extends Component {
-//     render() {
-//         return (
-//             <div>
-//                 Heyyyy
-//             </div>
-//         );
-//     }
-// }
+class Todo extends Component {
+    render() {
+        return (
+            <div>
+                <button>Click dis</button>
+            </div>
+        );
+    }
+}
 
-// export default connect()(Todo);
+const mapStateToProps = (state) => {
+    console.log(state)
+    return {
+        todos: state.todos
+    };
+};
 
-const Todo = () => (
-    <div>
-        Heyy
-    </div>
-);
-
-export default Todo;
+export default connect(mapStateToProps, { addTodo })(Todo);

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addTodo } from '../actions/todoActions';
+import TodoList from './TodoList';
 
 class Todo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: '',
-            todos: []
+            todos: [],
+            value: ''
     }
     }
     handleChange = (event) => {
@@ -19,7 +20,7 @@ class Todo extends Component {
     handleSubmit = event => {
         event.preventDefault();
         this.setState({
-            todos: this.state.value,
+            todos: [...this.state.todos, this.state.value],
             value: ''
         });
     }
@@ -27,7 +28,13 @@ class Todo extends Component {
     render() {
         console.log('from Todo class', this.state.todos)
         return (
-                <div>
+            <div>
+                {this.state.todos.map((item, index) => 
+                    <TodoList 
+                        todo={item}
+                    />
+                )}
+                <TodoList todos={this.state.todos} />
                 <form onSubmit={this.handleSubmit}>
                     <input type='text' name='email' onChange={this.handleChange}/>
                     <input type="submit" value="Add Todo" />
@@ -38,9 +45,9 @@ class Todo extends Component {
 }
 
 const mapStateToProps = (state) => {
-    // console.log(state)
     return {
-        todos: state.todos
+        todos: state.todos,
+        value: state.value
     };
 };
 

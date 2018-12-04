@@ -25,6 +25,7 @@ export const HANDLE_SUBMIT = 'HANDLE_SUBMIT'
 export const onHandleSubmit = (item) => {
     return {
         type: 'HANDLE_SUBMIT',
-        payload: item
+        payload: item,
+        completed: false
     };
 }

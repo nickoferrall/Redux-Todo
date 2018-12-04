@@ -8,7 +8,8 @@ class Todo extends Component {
         super(props);
         this.state = {
             todos: [],
-            value: ''
+            value: '',
+            completed: false
     }
     }
 
@@ -22,7 +23,7 @@ class Todo extends Component {
         event.preventDefault();
         console.log('from handle submit method', this.props.onHandleSubmit(this.state.value))
         this.setState({
-            todos: [...this.state.todos, this.state.value],
+            todos: [...this.state.todos, this.state.value, this.state.completed: false],
             value: ''
         });
     }

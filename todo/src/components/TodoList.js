@@ -1,7 +1,7 @@
 import React from 'react';
 
 const TodoList = props => {
-    console.log('props from todolist', props.todos)
+    // console.log('props from todolist', props.todos)
     return (
         <ul>
             {props.todos}

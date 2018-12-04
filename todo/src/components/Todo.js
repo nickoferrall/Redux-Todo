@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addTodo } from '../actions/todoActions';
+import { onHandleSubmit } from '../actions/todoActions';
 import TodoList from './TodoList';
 
 class Todo extends Component {
@@ -11,6 +11,7 @@ class Todo extends Component {
             value: ''
     }
     }
+
     handleChange = (event) => {
         this.setState({
             value: event.target.value
@@ -19,6 +20,7 @@ class Todo extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
+        console.log('from handle submit method', this.props.onHandleSubmit(this.state.value))
         this.setState({
             todos: [...this.state.todos, this.state.value],
             value: ''
@@ -26,7 +28,7 @@ class Todo extends Component {
     }
 
     render() {
-        console.log('from Todo class', this.state.todos)
+        console.log('from Todo class', this.state.value)
         return (
             <div>
                 {this.state.todos.map((item, index) => 
@@ -34,7 +36,7 @@ class Todo extends Component {
                         todo={item}
                     />
                 )}
-                <TodoList todos={this.state.todos} />
+                {/* <TodoList todos={this.state.todos} /> */}
                 <form onSubmit={this.handleSubmit}>
                     <input type='text' name='email' onChange={this.handleChange}/>
                     <input type="submit" value="Add Todo" />
@@ -44,6 +46,7 @@ class Todo extends Component {
     }
 }
 
+
 const mapStateToProps = (state) => {
     return {
         todos: state.todos,
@@ -51,4 +54,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { addTodo })(Todo);
+export default connect(mapStateToProps, { onHandleSubmit })(Todo);

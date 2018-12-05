@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { onHandleSubmit } from '../actions/todoActions';
+import { onHandleSubmit, onChangeCompleted } from '../actions/todoActions';
 import TodoList from './TodoList';
 
 class Todo extends Component {
@@ -22,6 +22,7 @@ class Todo extends Component {
     handleSubmit = event => {
         event.preventDefault();
         // console.log('from handle submit method', this.props.onHandleSubmit(this.state.value))
+        // console.log('handlesubmit', event)
         this.props.onHandleSubmit(this.state.value)
         this.setState({
             todos: [...this.state.todos, this.state.value, this.state.completed: false],
@@ -30,10 +31,12 @@ class Todo extends Component {
     }
 
     changeCompleted = props => {
-        console.log('Vamos')
-        this.setState({
-            completed: !this.state.completed
-        })
+        // const newTodo = {user: this.state.value, id: props}
+        this.props.onChangeCompleted(props)
+        console.log('changecomple', props)
+        // this.setState({
+        //    completed: !this.state.completed
+        // })
     }
 
     render() {
@@ -60,4 +63,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { onHandleSubmit })(Todo);
+export default connect(mapStateToProps, { onHandleSubmit, onChangeCompleted })(Todo);

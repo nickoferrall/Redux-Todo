@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const TodoList = props => {
-    console.log('props from todolist', props.todos)
+    // console.log('props from todolist', props.todos)
     return (
         <ul>
             {props.todos.map((item, index) => 
-            <li onClick={props.changeCompleted} key={index}>
-                {item.todos}
+            <li onClick={() => props.changeCompleted(index)} key={index}>
+                {item.text}
             </li>)}
         </ul>
     )
